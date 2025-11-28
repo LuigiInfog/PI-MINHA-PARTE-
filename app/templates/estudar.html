@@ -1,0 +1,281 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="logo.ico" type="image/x-icon" />
+  <title>Estudar - PFI</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #1b2b3a;
+      color: #e4ecf2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #12233e;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #0073e6;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-container img {
+      height: 45px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      color: #00aaff;
+    }
+
+    nav a {
+      color: #c0d8f0;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00aaff;
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Sidebar estilo Telegram */
+    .sidebar {
+      width: 280px;
+      background-color: #22364c;
+      border-right: 1px solid #334a62;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      padding: 20px;
+      font-size: 1.3rem;
+      color: #00d0ff;
+      border-bottom: 1px solid #334a62;
+    }
+
+    .category-btn {
+      padding: 15px 20px;
+      border: none;
+      background: none;
+      color: #d9e7f3;
+      text-align: left;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      border-bottom: 1px solid #334a62;
+    }
+
+    .category-btn:hover, .category-btn.active {
+      background-color: #2c425b;
+    }
+
+    /* Área de conteúdo (mensagens) */
+    .content {
+      flex: 1;
+      background-color: #0f1e2e;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .content h3 {
+      font-size: 1.5rem;
+      color: #00aaff;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #0073e6;
+      padding-bottom: 5px;
+    }
+
+    .message {
+      background-color: #1c2d40;
+      border-radius: 8px;
+      padding: 12px 15px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .message strong {
+      color: #00bfff;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .message small {
+      color: #b0cde8;
+      font-size: 0.9rem;
+    }
+
+    form {
+      background-color: #22364c;
+      padding: 15px;
+      border-top: 1px solid #334a62;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    form input, form textarea, form select {
+      background-color: #1e2e40;
+      border: none;
+      padding: 10px;
+      color: #fff;
+      border-radius: 5px;
+      resize: vertical;
+    }
+
+    form button {
+      align-self: flex-end;
+      background-color: #0073e6;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    form button:hover {
+      background-color: #005bb5;
+    }
+
+    footer {
+      background-color: #12233e;
+      color: #446688;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 0.9rem;
+      border-top: 1px solid #0b1220;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <a href="{% url 'index' %}">
+        <img src="{% static 'logo.png' %}" alt="Logo do PFI" />
+      </a>
+      <h1>PFI</h1>
+    </div>
+    <nav>
+      <a href="{% url 'index' %}">Início</a>
+      <a href="{% url 'sobre' %}">Sobre</a>
+      <a href="{% url 'casosbase' %}">Casos de Base</a>
+      <a href="{% url 'forum' %}">Fórum</a>
+      <a href="{% url 'login' %}">Login</a>
+    </nav>
+  </header>
+  <main>
+    <aside class="sidebar">
+      <h2>Grupos</h2>
+      <button class="category-btn active" data-category="psicologia">🧠 Psicologia</button>
+      <button class="category-btn" data-category="criminalistica">🔬 Criminalística</button>
+      <button class="category-btn" data-category="tecnicas">🕵️ Técnicas</button>
+      <button class="category-btn" data-category="outros">📁 Outros</button>
+    </aside>
+
+    <section class="content">
+      <h3 id="categoriaAtual">🧠 Psicologia</h3>
+      <div id="mensagens"></div>
+
+      <form id="formCaso">
+        <input type="text" id="titulo" placeholder="Título do caso" required />
+        <textarea id="descricao" rows="3" placeholder="Descrição do caso" required></textarea>
+        <input type="date" id="data" required />
+        <button type="submit">Adicionar Caso</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 PFI - Todos os direitos reservados.
+  </footer>
+
+  <script>
+    const categorias = {
+      psicologia: [],
+      criminalistica: [],
+      tecnicas: [],
+      outros: []
+    };
+
+    let categoriaAtual = "psicologia";
+
+    const categoriaBtns = document.querySelectorAll('.category-btn');
+    const mensagensDiv = document.getElementById('mensagens');
+    const form = document.getElementById('formCaso');
+    const categoriaTitulo = document.getElementById('categoriaAtual');
+
+    function renderMensagens() {
+      mensagensDiv.innerHTML = "";
+      categorias[categoriaAtual].forEach(caso => {
+        const msg = document.createElement('div');
+        msg.classList.add('message');
+        msg.innerHTML = `
+          <strong>${caso.titulo}</strong>
+          <p>${caso.descricao}</p>
+          <small>📅 ${caso.data}</small>
+        `;
+        mensagensDiv.appendChild(msg);
+      });
+
+      // Atualiza título
+      const texto = categoriaBtns.namedItem(categoriaAtual)?.innerText || categoriaAtual;
+      categoriaTitulo.innerText = categoriaBtns
+        .find(btn => btn.dataset.category === categoriaAtual)
+        .innerText;
+    }
+
+    categoriaBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoriaBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        categoriaAtual = btn.dataset.category;
+        renderMensagens();
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const titulo = document.getElementById('titulo').value;
+      const descricao = document.getElementById('descricao').value;
+      const data = document.getElementById('data').value;
+
+      categorias[categoriaAtual].push({ titulo, descricao, data });
+      form.reset();
+      renderMensagens();
+    });
+
+    renderMensagens(); // Carrega mensagens iniciais
+  </script>
+</body>
+</html>

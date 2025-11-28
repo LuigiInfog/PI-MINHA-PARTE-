@@ -1,0 +1,139 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="logo.ico" type="image/x-icon">
+  <title>Sobre o PFI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0b1220;
+      color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #12233e;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #0073e6;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-container img {
+      height: 45px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      color: #00aaff;
+      margin: 0;
+    }
+
+    nav a {
+      color: #c0d8f0;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00aaff;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 60px 30px;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    main h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00aaff;
+      text-align: center;
+    }
+
+    main p {
+      font-size: 1.1rem;
+      color: #cbd9f0;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    footer {
+      background-color: #12233e;
+      color: #446688;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      border-top: 1px solid #0b1220;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <a href="{% url 'index' %}">
+        <img src="{% static 'logo.png' %}" alt="Logo do PFI" />
+      </a>
+      <h1>PFI</h1>
+    </div>
+    <nav>
+      <a href="{% url 'index' %}">Início</a>
+      <a href="{% url 'sobre' %}">Sobre</a>
+      <a href="{% url 'casosbase' %}">Casos de Base</a>
+      <a href="{% url 'forum' %}">Fórum</a>
+      <a href="{% url 'login' %}">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Sobre o Projeto</h2>
+    <p>
+      O Projeto Federal de Investigação (PFI) é uma iniciativa educacional e tecnológica voltada para o desenvolvimento de soluções modernas de monitoramento, análise e investigação de dados. Inspirado nas operações e na seriedade de instituições como o FBI, o PFI tem como missão promover a justiça, a transparência e a segurança digital em ambientes simulados.
+    </p>
+
+    <p>
+      O projeto nasceu como parte de um programa acadêmico, onde os alunos são desafiados a construir um sistema completo que simula uma força federal de investigação. Esse sistema é composto por páginas de cadastro, consulta de casos, relatórios e acompanhamento de investigações fictícias, utilizando boas práticas de desenvolvimento web.
+    </p>
+
+    <p>
+      Além do aspecto técnico, o PFI também valoriza o trabalho em equipe, a documentação eficiente e o pensamento estratégico. Com isso, pretende-se preparar futuros profissionais da área de tecnologia para atuar em ambientes críticos e sensíveis, com ética e responsabilidade.
+    </p>
+
+    <p>
+      Segundo dados do Instituto Sou da Paz, apenas 35% dos homicídios dolosos são resolvidos no Brasil. Essa taxa relativamente baixa de esclarecimento levanta preocupações sobre a existência de serial killers não identificados no país ou outras formas de crimes pouco averiguadas. A combinação entre impunidade, alto número de crimes e a carência de recursos investigativos cria um ambiente propício para crimes em série passarem despercebidos por longos períodos.
+    </p>
+  </main>
+
+  <footer>
+    © 2025 PFI - Todos os direitos reservados.
+  </footer>
+</body>
+</html>

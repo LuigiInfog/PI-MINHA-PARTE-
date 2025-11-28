@@ -1,0 +1,182 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fórum Público - PFI</title>
+  <style>
+    body {
+      background-color: #0b1220;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #12233e;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #0073e6;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-container img {
+      height: 45px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      color: #00aaff;
+      margin: 0;
+    }
+
+    nav a {
+      color: #c0d8f0;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00aaff;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      background-color: #1a2a40;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
+    }
+
+    h2 {
+      text-align: center;
+      color: #00ffcc;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #c0d8f0;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 5px;
+      background-color: #f0f0f0;
+      color: #000;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #00aaff;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0088cc;
+    }
+
+    .success-message {
+      background-color: #003d2e;
+      color: #00ffcc;
+      padding: 15px;
+      text-align: center;
+      border-radius: 8px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <a href="{% url 'index' %}">
+        <img src="{% static 'logo.png' %}" alt="Logo do PFI" />
+      </a>
+      <h1>PFI</h1>
+    </div>
+    <nav>
+      <a href="{% url 'index' %}">Início</a>
+      <a href="{% url 'sobre' %}">Sobre</a>
+      <a href="{% url 'casosbase' %}">Casos de Base</a>
+      <a href="{% url 'forum' %}">Fórum</a>
+      <a href="{% url 'login' %}">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Envie uma mensagem ou denúncia</h2>
+
+    <form action="https://formspree.io/f/xzzgydya" method="POST" id="forumForm">
+      <label for="nome">Seu nome (opcional):</label>
+      <input type="text" name="nome" id="nome" placeholder="Anônimo, se preferir" />
+
+      <label for="email">Seu e-mail (opcional):</label>
+      <input type="email" name="email" id="email" placeholder="Para contato (opcional)" />
+
+      <label for="mensagem">Mensagem / Denúncia:</label>
+      <textarea name="mensagem" id="mensagem" rows="6" required placeholder="Escreva aqui sua mensagem..."></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <div class="success-message" id="successMsg">
+      Mensagem enviada com sucesso! Agradecemos sua colaboração.
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('forumForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          form.reset();
+          successMsg.style.display = 'block';
+        } else {
+          alert('Erro ao enviar. Tente novamente mais tarde.');
+        }
+      }).catch(error => {
+        alert('Erro na conexão. Verifique sua internet.');
+      });
+    });
+  </script>
+</body>
+</html>

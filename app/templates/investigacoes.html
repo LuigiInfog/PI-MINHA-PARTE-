@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel de Investigações</title>
+<style>
+body { background:#0b1220; color:#f0f0f0; font-family:sans-serif; padding:0; margin:0; }
+header { display:flex; justify-content:space-between; align-items:center; background:#12233e; padding:15px 30px; border-bottom:3px solid #00aaff; }
+header h1 { color:#00aaff; margin:0; }
+nav a { color:#c0d8f0; margin-left:20px; text-decoration:none; font-weight:500; }
+nav a:hover { color:#00aaff; }
+main { max-width:1200px; margin:30px auto; padding:0 20px; }
+.investigation-card { background:#12233e; padding:25px; border-radius:10px; margin:20px 0; box-shadow:0 0 20px rgba(0,170,255,0.2); border:1px solid #1e3a5c; }
+.investigation-title { color:#00aaff; font-size:1.4rem; margin:0 0 10px 0; }
+.investigation-card p { color:#c0d8f0; line-height:1.5; margin:10px 0 20px 0; }
+.btn { padding:10px 20px; margin-right:12px; border:none; border-radius:6px; cursor:pointer; text-decoration:none; display:inline-block; font-weight:500; }
+.btn-primary { background:#00aaff; color:white; }
+.btn-primary:hover { background:#0088cc; }
+.btn-secondary { background:#22cc88; color:white; }
+.btn-secondary:hover { background:#009955; }
+.btn-success { background:#28a745; color:white; }
+.btn-success:hover { background:#218838; }
+.logout { background:#cc0000; color:white; border:none; padding:12px 25px; border-radius:6px; cursor:pointer; margin-top:20px; font-size:1rem; }
+.logout:hover { background:#aa0000; }
+h2 { color:#00aaff; border-bottom:2px solid #00aaff; padding-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+.header-actions { display:flex; gap:15px; align-items:center; }
+.status-concluida { color: #22cc88; }
+.status-em-andamento { color: #00aaff; }
+.status-arquivada { color: #ffaa00; }
+.status-suspensa { color: #ff6666; }
+</style>
+</head>
+<body>
+<header>
+  <h1>PFI - Painel de Investigações</h1>
+  <nav>
+    <a href="{% url 'index' %}">Início</a>
+    <a href="{% url 'sobre' %}">Sobre</a>
+    <a href="{% url 'casosbase' %}">Casos de Base</a>
+    <a href="{% url 'forum' %}">Fórum</a>
+    <a href="#" id="logoutLink">Sair</a>
+  </nav>
+</header>
+
+<main id="loggedInContent">
+  <h2>
+    Painel de Investigações
+    <div class="header-actions">
+      <a href="{% url 'nova_investigacao' %}" class="btn btn-success">+ Nova Investigação</a>
+    </div>
+  </h2>
+
+  {% for investigacao in investigacoes %}
+  <div class="investigation-card">
+    <h3 class="investigation-title">{{ investigacao.titulo }}</h3>
+    <p>
+        <strong>Status:</strong> 
+        <span class="{% if investigacao.status == 'Concluída' %}status-concluida{% elif investigacao.status == 'Em andamento' %}status-em-andamento{% elif investigacao.status == 'Arquivada' %}status-arquivada{% elif investigacao.status == 'Suspensa' %}status-suspensa{% endif %}">
+            {{ investigacao.status }}
+        </span> 
+        | <strong>Responsável:</strong> {{ investigacao.responsavel }}
+        | <strong>Início:</strong> {{ investigacao.data_inicio }}
+    </p>
+    <p>{{ investigacao.descricao|truncatewords:30 }}</p>
+    <a href="{% url 'relatorio_investigacao' investigacao.id %}" class="btn btn-primary">Ver Relatório Completo</a>
+    <a href="{% url 'relatorio_investigacao_pdf' investigacao.id %}" class="btn btn-secondary">📄 Baixar PDF</a>
+  </div>
+  {% empty %}
+  <div class="investigation-card" style="text-align:center; padding:40px;">
+    <h3 style="color:#c0d8f0;">Nenhuma investigação cadastrada</h3>
+    <p>Clique em "Nova Investigação" para criar o primeiro relatório.</p>
+    <a href="{% url 'nova_investigacao' %}" class="btn btn-success">Criar Primeira Investigação</a>
+  </div>
+  {% endfor %}
+
+  <button class="logout" id="logoutBtn">Sair do Sistema</button>
+</main>
+
+<script>
+// Verifica login via localStorage
+const userLogged = localStorage.getItem('userLogged');
+if(!userLogged){
+  window.location.href = "{% url 'login' %}";
+}
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  localStorage.removeItem('userLogged');
+  window.location.href = "{% url 'login' %}";
+});
+document.getElementById('logoutLink').addEventListener('click', (e)=>{
+  e.preventDefault();
+  localStorage.removeItem('userLogged');
+  window.location.href = "{% url 'login' %}";
+});
+</script>
+</body>
+</html>

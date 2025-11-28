@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1,
+    "titulo": "Operação Canteiro",
+    "responsavel": "Agente Silva",
+    "data_inicio": "2025-01-15",
+    "data_fim": "2025-03-20",
+    "status": "Concluída",
+    "descricao": "Investigação sobre desvio de verbas públicas em obras do governo municipal. Foram identificados superfaturamento e direcionamento de licitações."
+  },
+  {
+    "id": 2,
+    "titulo": "Caso Mai",
+    "responsavel": "Agente Souza",
+    "data_inicio": "2025-04-01",
+    "data_fim": null,
+    "status": "Em andamento",
+    "descricao": "Investigação sobre tráfico internacional de drogas envolvendo rotas marítimas. Em fase de coleta de inteligência."
+  },
+  {
+    "id": 3,
+    "titulo": "Operação Farol",
+    "responsavel": "Agente Costa",
+    "data_inicio": "2025-02-10",
+    "data_fim": "2025-05-30",
+    "status": "Concluída",
+    "descricao": "Investigação de corrupção em órgãos públicos federais. Resultou em 15 prisões e recuperação de R$ 50 milhões."
+  },
+  {
+    "id": 4,
+    "titulo": "Operação Licitações SP",
+    "responsavel": "Agente Almeida",
+    "data_inicio": "2025-11-28",
+    "data_fim": null,
+    "status": "Concluída",
+    "descricao": "Investigo fraudes em licitações públicas",
+    "localizacao": "São Paulo",
+    "categoria": "Corrupção"
+  }
+]

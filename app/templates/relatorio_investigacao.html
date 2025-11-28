@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Relatório da Investigação{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Relatório da Investigação</h2>
+
+        <p><strong>Título:</strong> {{ investigacao.titulo }}</p>
+        <p><strong>Responsável:</strong> {{ investigacao.responsavel }}</p>
+        <p><strong>Data de Início:</strong> {{ investigacao.data_inicio|date:"d/m/Y" }}</p>
+        {% if investigacao.data_fim %}
+        <p><strong>Data de Fim:</strong> {{ investigacao.data_fim|date:"d/m/Y" }}</p>
+        {% endif %}
+        <p><strong>Status:</strong> {{ investigacao.status }}</p>
+
+        <hr>
+        <h5>Descrição Detalhada:</h5>
+        <p>{{ investigacao.descricao|linebreaks }}</p>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'relatorio_investigacao_pdf' investigacao.id %}" class="btn btn-primary">
+                📄 Baixar PDF
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

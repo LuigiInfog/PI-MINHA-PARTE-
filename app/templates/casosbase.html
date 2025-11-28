@@ -1,0 +1,231 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="{% static 'logo.ico' %}" type="image/x-icon">
+  <title>PFI - Casos de Base</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    html, body {
+      height: auto;
+      min-height: 100%;
+      background-color: #0b1220;
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #12233e;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #0073e6;
+      flex-shrink: 0;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-container img {
+      height: 45px;
+    }
+
+    .logo-container a {
+      text-decoration: none;
+      color: #00aaff;
+      font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    nav a {
+      color: #c0d8f0;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00aaff;
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    select {
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: none;
+      margin-bottom: 30px;
+      background-color: #12233e;
+      color: #f0f0f0;
+    }
+
+    .case-details {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: left;
+      background-color: #1a263b;
+      padding: 30px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .case-details h2 {
+      color: #00aaff;
+      margin-bottom: 10px;
+    }
+
+    .case-details img {
+      max-width: 60%;
+      height: auto;
+      border-radius: 6px;
+      margin: 15px auto 0 auto;
+      display: block;
+    }
+
+    footer {
+      background-color: #12233e;
+      color: #888;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <a href="{% url 'index' %}">
+        <img src="{% static 'logo.png' %}" alt="Logo do PFI" />
+      </a>
+      <h1>PFI</h1>
+    </div>
+    <nav>
+      <a href="{% url 'index' %}">Início</a>
+      <a href="{% url 'sobre' %}">Sobre</a>
+      <a href="{% url 'casosbase' %}">Casos de Base</a>
+      <a href="{% url 'forum' %}">Fórum</a>
+      <a href="{% url 'login' %}">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Casos de Base</h1>
+    <p>Selecione um caso para visualizar os detalhes investigativos que usamos e apurar os dados coletados e usados como base para nosso entendimento e ação contra mentes criminosas.</p>
+
+    <select id="caseSelector" onchange="showCase()">
+      <option value="">-- Escolha um caso --</option>
+      <option value="kemper">Ed Kemper</option>
+      <option value="manson">Charles Manson</option>
+      <option value="btk">BTK (Dennis Rader)</option>
+      <option value="Ted Bundy">Ted Bundy</option>
+      <option value="pedrinho">Pedrinho Matador</option>
+    </select>
+
+    <div id="kemper" class="case-details">
+      <h2>Ed Kemper</h2>
+      <p>Edmund Emil Kemper III, conhecido como "Co-Ed Killer", é um dos casos mais estudados da criminologia devido ao seu perfil psicológico complexo e ao modus operandi singular. Kemper exibiu traços claros de transtorno de personalidade anti-social e comportamento psicopático, incluindo falta de empatia, manipulação e ausência de remorso. Desde a infância, demonstrou sinais de comportamento agressivo e dificuldade em se relacionar socialmente, com um histórico precoce de violência doméstica e homicídio familiar.
+
+        Sua inteligência elevada — com QI estimado em torno de 145 — e capacidade verbal permitiram que ele colaborasse extensamente com agentes do FBI, proporcionando insights valiosos sobre o funcionamento da mente criminosa. Kemper utilizava táticas de engano para atrair suas vítimas, jovens estudantes universitárias, demonstrando um alto grau de planejamento e controle sobre suas ações.
+        
+        Na investigação criminal, a captura de Kemper foi facilitada por uma combinação de evidências físicas e psicológicas. Sua prisão ocorreu após ele próprio se entregar à polícia, após matar sua mãe e uma amiga dela, fato que desencadeou sua confissão detalhada. O trabalho de perfis criminais desenvolvido pelo FBI, liderado por agentes como John Douglas, foi fundamental para compreender os padrões do assassino e antecipar seus movimentos. Análises forenses e entrevistas minuciosas ajudaram a estabelecer ligações entre os crimes e a confirmar sua autoria.
+        
+        Kemper representa um marco na aplicação da psicologia forense e do perfil criminal em investigações, servindo como um caso emblemático para o desenvolvimento de técnicas modernas de análise comportamental e captura de serial killers.</p>
+      <img src="{% static 'edmund-kemper-1.webp' %}" alt="Ed Kemper">
+    </div>
+
+    <div id="manson" class="case-details">
+      <h2>Charles Manson</h2>
+      <p>Charles Milles Manson foi o líder carismático de um culto denominado "Família Manson", cuja influência psicológica sobre seus seguidores resultou em uma série de assassinatos brutais em 1969. Do ponto de vista psicológico, Manson apresentava características típicas de um manipulador sociopata, com elevado grau de persuasão, carisma e habilidades para controle mental. Sua capacidade de doutrinar jovens vulneráveis envolvia técnicas de lavagem cerebral, isolamento social e indução a estados alterados de consciência, incluindo uso de drogas psicodélicas.
+
+        Manson explorava crenças apocalípticas e raciais para incitar seus seguidores à violência, utilizando-se de uma ideologia distorcida que culminou nos assassinatos de figuras públicas como Sharon Tate e outros. Psicólogos forenses destacam seu comportamento narcisista, ausência de remorso e uso sistemático da manipulação emocional para manter o controle sobre o grupo.
+        
+        A captura e condenação de Manson foram resultado de uma investigação meticulosa, que envolveu coleta de provas físicas, depoimentos de sobreviventes e a análise dos vínculos entre os membros da "Família". As autoridades conseguiram conectar Manson diretamente aos crimes através de evidências forenses, além de testemunhos que confirmaram sua participação e incitação aos assassinatos. O julgamento do caso foi marcado pela exposição da dinâmica psicológica do culto e o impacto devastador da liderança de Manson sobre seus seguidores.
+        
+        Este caso foi fundamental para o estudo da influência de líderes carismáticos em grupos desviantes e reforçou a importância da análise psicológica em investigações criminais complexas envolvendo crimes em grupo.
+        
+        </p>
+      <img src="{% static 'Manson1968.jpg' %}" alt="Charles Manson">
+    </div>
+
+    <div id="btk" class="case-details">
+      <h2>BTK (Dennis Rader)</h2>
+      <p>Dennis Rader, conhecido pela sigla BTK (Bind, Torture, Kill), é um serial killer cuja carreira criminosa se estendeu por quase três décadas, entre 1974 e 1991. Psicologicamente, Rader exibia traços de transtorno de personalidade anti-social com elementos de narcisismo e sadismo, evidenciados pelo seu padrão de comportamento controlado, meticuloso e calculista. Diferente de muitos assassinos que agem impulsivamente, Rader planejava minuciosamente seus crimes e mantinha uma fachada de cidadão exemplar, exercendo cargos públicos na comunidade de Wichita, Kansas.
+
+        Sua característica mais marcante era o envio de cartas e mensagens codificadas para a polícia e para a mídia, nas quais detalhava seus crimes, desafiava as autoridades e buscava notoriedade. Esse comportamento demonstra um forte desejo de controle e poder, associado a uma necessidade compulsiva de reconhecimento e validação.
+        
+        A captura de Dennis Rader foi fruto de um trabalho investigativo que combinou técnicas tradicionais de polícia com análise forense digital e perfil comportamental. Após um longo período de silêncio, Rader retomou a comunicação com a polícia em 2004, enviando disquetes com pistas. A perícia digital conseguiu extrair metadados desses disquetes, que apontaram para a igreja onde ele atuava como líder religioso. Esse avanço foi decisivo para a sua prisão em 2005.
+        
+        O caso BTK é emblemático por demonstrar a importância da evolução tecnológica na resolução de crimes antigos, aliada à compreensão profunda do comportamento do criminoso. Rader representou um desafio para os perfis psicológicos tradicionais, pois combinava comportamento duplo — cidadão modelo e assassino brutal — tornando sua detecção mais complexa.</p>
+      <img src="{% static 'btk.jpg' %}" alt="BTK Killer">
+    </div>
+    <div id="Ted Bundy" class="case-details">
+      <h2>Ted Bundy</h2>
+      <p>Ted Bundy é considerado um dos serial killers mais notórios e estudados da história criminal contemporânea. Sua análise psicológica revela um indivíduo com traços evidentes de transtorno de personalidade antissocial e psicopatia, caracterizados por manipulação extrema, falta de empatia, charme superficial e uma habilidade extraordinária para enganar suas vítimas e as autoridades.
+
+          Bundy utilizava seu carisma e aparência atraente para ganhar a confiança das vítimas, principalmente mulheres jovens, explorando técnicas de sedução e manipulação. Seu modus operandi incluía o sequestro, agressão sexual e assassinato, geralmente com violência extrema e necrofilia posterior. Além disso, Bundy exibia comportamento narcisista e sadismo, o que se refletia em sua busca por controle absoluto sobre as vítimas.
+          
+          Do ponto de vista investigativo, a captura de Bundy envolveu o uso pioneiro do perfil criminal, uma técnica então emergente que ajudou a polícia a compreender o comportamento e os padrões do assassino em série. Bundy foi preso várias vezes, mas conseguiu escapar duas vezes, o que evidenciava sua astúcia e capacidade de manipulação. A colaboração entre diversas jurisdições e o compartilhamento de informações foram cruciais para seu recaptura final.
+          
+          Elementos forenses, como marcas de mordida e evidências de confronto físico, aliados a relatos de sobreviventes e testemunhas, foram essenciais para estabelecer a autoria dos crimes. O caso Bundy impulsionou avanços na psicologia forense, no uso do perfil criminal e na cooperação interagências, moldando os protocolos modernos de investigação de serial killers.</p>
+        <img src="{% static 'bundy.jpg' %}" alt="Ted Bundy">
+    </div>
+
+    
+    <div id="pedrinho" class="case-details">
+        <h2>Pedrinho Matador</h2>
+        <p>Pedro Rodrigues Filho, conhecido como "Pedrinho Matador", é um dos criminosos mais notórios do Brasil. Condenado por mais de 70 homicídios, ele alegava ter matado mais de 100 pessoas, muitas delas enquanto já estava preso. Seus alvos incluíam principalmente outros criminosos, o que lhe rendeu uma aura de "justiceiro sombrio".
+
+    Psicologicamente, apresentava traços de psicopatia com senso de justiça distorcido. Demonstrava ausência de empatia, impulsividade e tendência homicida desde a infância. Começou a matar ainda na adolescência, inicialmente por vingança familiar.
+
+    A polícia utilizou técnicas investigativas tradicionais para localizar e prender Pedrinho, mas sua verdadeira trajetória só foi compreendida ao longo dos anos em que permaneceu encarcerado. Ele frequentemente se comunicava com a mídia, revelando detalhes sobre os assassinatos e justificativas pessoais para os crimes. 
+    
+    Seu caso desafia fronteiras entre crime, justiça e psicologia, e é utilizado até hoje como exemplo extremo de comportamento sociopático e justificação moral desviada.</p>
+        <img src="https://images.squarespace-cdn.com/content/v1/6071c47bdc6dc87c9b42e162/b288c0e7-5850-42ef-b1dd-460104115207/instagram-%23160.png" alt="Pedrinho Matador">
+    </div>
+  </main>
+
+  <footer>
+    © 2025 PFI - Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function showCase() {
+      const cases = document.querySelectorAll('.case-details');
+      cases.forEach(c => c.style.display = 'none');
+
+      const selected = document.getElementById('caseSelector').value;
+      if (selected) {
+        document.getElementById(selected).style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>

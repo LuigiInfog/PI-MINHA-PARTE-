@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+
+  <title>PFI - Projeto Federal de Investigação</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      position: relative;
+      background-color: #0b1220;
+      color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+    }
+
+    /* Plano de fundo cinematográfico */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("{% static 'telmo-filho-HdsYsP5XON4-unsplash.jpg' %}") no-repeat center center/cover;
+      opacity: 0.90;
+      z-index: -2;
+    }
+
+    /* Camada escura extra para contraste */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    header {
+      background-color: #12233e;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #0073e6;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-container img {
+      height: 45px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 4px;
+      color: #00aaff;
+      margin: 0;
+    }
+
+    nav a {
+      color: #c0d8f0;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00aaff;
+    }
+
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    main h2 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #00aaff;
+      letter-spacing: 3px;
+    }
+
+    main p {
+      max-width: 600px;
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      color: #b0c4de;
+      line-height: 1.5;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 14px 30px;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      letter-spacing: 2px;
+    }
+
+    .btn-primary {
+      background-color: #0073e6;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: #005bb5;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 2px solid #0073e6;
+      color: #0073e6;
+    }
+
+    .btn-secondary:hover {
+      background-color: #0073e6;
+      color: #fff;
+    }
+
+    footer {
+      background-color: #12233e;
+      color: #446688;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      border-top: 1px solid #0b1220;
+    }
+
+    @media (max-width: 600px) {
+      main h2 {
+        font-size: 2rem;
+      }
+      .btn-group {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <a href="{% url 'index' %}">
+
+        <img src="{% static 'logo.png' %}" alt="Logo do PFI" />
+      </a>
+      <h1>PFI</h1>
+    </div>
+    <nav>
+      <a href="{% url 'index' %}">Início</a>
+      <a href="{% url 'sobre' %}">Sobre</a>
+      <a href="{% url 'casosbase' %}">Casos de Base</a>
+      <a href="{% url 'forum' %}">Fórum</a>
+      <a href="{% url 'login' %}">Login</a>      
+    </nav>
+  </header>
+
+  <main>
+    <h2>Projeto Federal de Investigação</h2>
+    <p>Missão: Proteger e servir com integridade, transparência e eficácia na investigação federal. Junte-se a nós para construir um país mais seguro e justo.</p>
+    <div class="btn-group">
+      <button class="btn btn-primary">Iniciar Investigação</button>
+      <button class="btn btn-secondary">Conheça Mais</button>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 PFI - Todos os direitos reservados.
+  </footer>
+</body>
+</html>

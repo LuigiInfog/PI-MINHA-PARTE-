@@ -1,0 +1,129 @@
+<!-- templates/nova_investigacao.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nova Investigação - PFI</title>
+    <style>
+        body {background:#0b1220; color:#f0f0f0; font-family:sans-serif; padding:0; margin:0;}
+        header {display:flex; justify-content:space-between; align-items:center; background:#12233e; padding:15px 30px; border-bottom:3px solid #00aaff;}
+        header h1 {color:#00aaff; margin:0;}
+        nav a {color:#c0d8f0; margin-left:20px; text-decoration:none; font-weight:500;}
+        nav a:hover {color:#00aaff;}
+        .container {max-width:800px; margin:30px auto; padding:0 20px;}
+        .card {background:#12233e; padding:30px; border-radius:10px; box-shadow:0 0 20px rgba(0,170,255,0.3); border:1px solid #1e3a5c;}
+        h2 {color:#00aaff; margin-bottom:30px; text-align:center;}
+        .form-group {margin-bottom:20px;}
+        label {display:block; margin-bottom:8px; color:#c0d8f0; font-weight:500;}
+        input, select, textarea {width:100%; padding:12px; border-radius:6px; border:1px solid #1e3a5c; background:#0b1220; color:white; font-size:1rem; font-family:sans-serif;}
+        input:focus, select:focus, textarea:focus {outline:none; border-color:#00aaff; box-shadow:0 0 5px rgba(0,170,255,0.5);}
+        textarea {min-height:120px; resize:vertical;}
+        .btn {padding:12px 25px; border:none; border-radius:6px; cursor:pointer; text-decoration:none; display:inline-block; font-weight:500; margin-right:15px; transition:all 0.3s;}
+        .btn-primary {background:#00aaff; color:white;}
+        .btn-primary:hover {background:#0088cc;}
+        .btn-secondary {background:#666; color:white;}
+        .btn-secondary:hover {background:#555;}
+        .form-actions {text-align:center; margin-top:30px; padding-top:20px; border-top:1px solid #1e3a5c;}
+        .form-row {display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+        @media (max-width: 768px) {
+            .form-row {grid-template-columns:1fr;}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PFI - Nova Investigação</h1>
+        <nav>
+            <a href="{% url 'investigacoes' %}">Voltar</a>
+            <a href="{% url 'index' %}">Início</a>
+            <a href="#" id="logoutLink">Sair</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Criar Nova Investigação</h2>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="titulo">Título da Investigação *</label>
+                    <input type="text" id="titulo" name="titulo" required 
+                           placeholder="Ex: Operação Canteiro - Desvio de Verbas">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="responsavel">Agente Responsável *</label>
+                        <input type="text" id="responsavel" name="responsavel" required 
+                               placeholder="Ex: Agente Silva">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">Status *</label>
+                        <select id="status" name="status" required>
+                            <option value="">Selecione o status</option>
+                            <option value="Em andamento">Em andamento</option>
+                            <option value="Concluída">Concluída</option>
+                            <option value="Arquivada">Arquivada</option>
+                            <option value="Suspensa">Suspensa</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="data_inicio">Data de Início *</label>
+                        <input type="date" id="data_inicio" name="data_inicio" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="data_fim">Data de Conclusão (opcional)</label>
+                        <input type="date" id="data_fim" name="data_fim">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="localizacao">Localização (opcional)</label>
+                        <input type="text" id="localizacao" name="localizacao" 
+                               placeholder="Ex: São Paulo, Rio de Janeiro">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="categoria">Categoria (opcional)</label>
+                        <select id="categoria" name="categoria">
+                            <option value="">Selecione uma categoria</option>
+                            <option value="Corrupção">Corrupção</option>
+                            <option value="Tráfico">Tráfico</option>
+                            <option value="Homicídio">Homicídio</option>
+                            <option value="Fraude">Fraude</option>
+                            <option value="Desvio">Desvio de Verbas</option>
+                            <option value="Lavagem">Lavagem de Dinheiro</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="descricao">Descrição Detalhada *</label>
+                    <textarea id="descricao" name="descricao" required 
+                              placeholder="Descreva detalhadamente a investigação, incluindo fatos, evidências, envolvidos e andamento do caso..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="{% url 'investigacoes' %}" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Criar Investigação</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Define data atual como padrão para data_inicio
+        document.getElementById('data_inicio').valueAsDate = new Date();
+    </script>
+</body>
+</html>

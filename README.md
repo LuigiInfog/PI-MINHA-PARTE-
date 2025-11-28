@@ -1,0 +1,1 @@
+ O projeto se propõe a ser uma ferramenta de auxília na busca de informações e efetuação de investigações. Sendo assim, reserva-se a ele as os principais objetivos: guardar informações, mostrar situações de casos investigativos cadastrados no sistema e possuir um banco de informações técnicas para o estudo adequado desses casos.
